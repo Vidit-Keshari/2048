@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>2048</title>
+
+    <link rel="icon" type="image/png" href="VGames logo.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>    
+
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div id="moon"></div>
+    <div id="stars-container"></div>
+    <div id="still-stars-container"></div>
+    <div id="contents">
+        <center>
+            <div id="header" class="btn btn-info">
+                <h1 id="heading">2048</h1>
+                <marquee><label id="quote"></label></marquee>
+            </div>
+            <div id="main-body">
+                <div id="game-area">
+                    <br><br>
+                    <div id="player">
+                        <input type="text" placeholder="player-name" id="player-name" class="form-control">
+                        <button onclick="rename();" class="btn" id="rename">&#9998;</button>
+                        <br><br><br>
+                    </div>
+                    <div id="display">
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+                        <div class="tile" data-value="0"></div>
+                    </div>
+                    <br><br>
+                    <div id="controls">
+                        <div id="up">
+                            <button onclick="up()" class="control">Up</button>
+                        </div>
+                        <div id="middle">
+                            <button onclick="left()" class="control">Left</button>
+                            <button onclick="right()" class="control">Right</button>
+                        </div>
+                        <div id="bottom">
+                            <button onclick="down()" class="control">Down</button>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div id="info">
+                        <label for="status">Status: <b id="status">Playing...</b></label>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </center>
+        <div id="instructions">
+            <h2>2048 Game Instructions</h2>
+
+            <h3>Objective:</h3>
+            <p>Combine numbered tiles by sliding them in one of the four directions. The goal is to reach the <span
+                    class="highlight">2048</span> tile!</p>
+
+            <h3>🎮 Controls:</h3>
+            <ul>
+                <li><strong>Arrow Keys</strong>: Move tiles up, down, left, or right.</li>
+                <li><strong>W, A, S, D</strong>: Alternative controls.</li>
+            </ul>
+
+            <h3>🔮 Gameplay Rules:</h3>
+            <ol>
+                <li>Each move spawns a new tile with a value of <span class="highlight">2</span> <span
+                        class="highlight">4</span> or <span class="highlight">8</span>.</li>
+                <li>Tiles move in the selected direction until they collide with another tile or the board edge.</li>
+                <li>If two tiles of the same number collide, they merge into one, doubling their value.</li>
+                <li>You win when you reach the <span class="highlight">2048</span> tile!</li>
+                <li>The game ends when no moves are possible.</li>
+            </ol>
+
+            <h3>🔄 Advanced Mechanics:</h3>
+            <ul>
+                <li><strong>Tile Generation Chances:</strong></li>
+                <ul>
+                    <li>70% chance for a <span class="highlight">2</span></li>
+                    <li>29.5% chance for a <span class="highlight">4</span></li>
+                    <li>0.5% chance for an <span class="highlight">8</span>!</li>
+                </ul>
+                <li>After the <span class="highlight">2048</span> tile, further tiles will follow the same style.
+                </li>
+            </ul>
+
+            <h3>🚀 Tips and Strategies:</h3>
+            <ul>
+                <li>Keep your highest-numbered tile in a corner.</li>
+                <li>Build numbers in one direction to maximize merges.</li>
+                <li>Think ahead and anticipate possible moves.</li>
+                <li>Watch for opportunities to merge multiple tiles at once!</li>
+            </ul>
+            <h2>Credits</h2>
+            <ul>
+                <li>Background music: Indian walk - Nico Staf, downloaded from youtube audio library.</li>
+                <li>Made using VSCode.</li>
+                <li>Hosted on Github.</li>
+                <li>Helped by- ChatGPT.</li>
+                <li>Made completely by Vidit Keshari.</li>
+            </ul>
+        </div>
+        <div class="copyright-footer">
+            <center>
+                <label id="footer">Made by Vidit Keshari</label>
+                <br>
+                <label id="footer">A VGames production</label>
+                <br>
+                <label id="footer">version - v.1.0</label>
+            </center>
+        </div>
+        <center>
+            <div id="settings">
+                <center>
+                    <h2>Settings:- </h2>
+                    <br><br>
+                    <button onclick="toggleMusic();">Music: <b id="playing">Playing: Indian walk - Nico
+                            Staf</b></button>
+                    <br><br>
+                    <button onclick="restart();">Restart game</button>
+                    <br><br>
+                    <input class="form-control" type="text" id="string" placeholder="Enter the binary code here.">
+                    <br>
+                    <button onclick="decode();" class="btn">Load</button>
+                    <br><br>
+                    <button onclick="save();">Save game</button>
+                    <br><br>
+                    <button onclick="load();">Load last saved</button>
+                    <br><br>
+                    <label id="encoded"></label>
+                    <br><br>
+                    <label>Click on the above binary code to copy it. Keep it safe so that next time when you come, you
+                        can continue from the progress you made. This includes the position of tiles and name of the 
+                        player.
+                    </label>
+                    <br><br>
+                    <button onclick="dev();" style="display: none;">Devlper tools</button>
+                </center>
+            </div>
+        </center>
+        <br><br><br><br>
+    </div>
+    <audio id="background-music" autoplay loop>
+        <source src="Indian Walk - Nico Staf.mp3">
+    </audio>
+</body>
+
+</html>
