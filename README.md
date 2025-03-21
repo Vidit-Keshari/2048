@@ -1,6 +1,9 @@
 # Vidit: 2048
 An old-fashioned nstalgic game released by VGames in a blue theme!
 
+Play here:-
+> https://vidit-keshari.github.io/2048/
+
 ## 2048 Game Instructions
 
 ### Objective:
