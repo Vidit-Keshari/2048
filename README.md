@@ -47,10 +47,13 @@ Once reached **2048** continue to make **BIGGER TILES**!
 ## Version history:
 ### Initial release v.1.0
 
+More updates soon!
+
 ## You may also like:
 > Vidit: Old-series: lights-out- https://vidit-keshari.github.io/lights-out/ (game) ~~~ https://github.com/vidit-keshari/lights-out/ (blog)
 >
 > Vidit: Dussehra-game- https://vidit-keshari.github.io/dussehra-game/ (game) ~~~ https://github.com/vidit-keshari/dussehra-game/ (blog)
 
 A VGames production
+
 ![VGames logo](https://github.com/user-attachments/assets/0596bb58-d776-45de-80ec-781cdb73d023)
