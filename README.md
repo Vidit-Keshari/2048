@@ -45,6 +45,14 @@ Once reached **2048** continue to make **BIGGER TILES**!
 - **Creator:** Made completely by **Vidit Keshari**.
 
 ## Version history:
+
+### New update v.2.0
+- Some minor bug fixes.
+- Added new systems for saving the game.
+- Now the player names are synced with Vidit: Old Series: Lights Out.
+- Add some feature in approach to make the game compatible to phones.
+- Changed the mechanics a little to make the game better and avoid the unnecessary glitches
+
 ### Initial release v.1.0
 
 More updates soon!
