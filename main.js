@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("encoded").addEventListener("click", () => {
         navigator.clipboard.writeText(encoded_binary);
-        window.alert("Copied to clipboard!");
+        setMsg("Copied to clipboard!");
     });
 
     //    Tile setup
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
     update();
 
     if (!document.getElementById("player-name").value) {
-        window.alert("Enter your name");
+        setMsg("Enter your name");
     }
 
     randomQuote();
@@ -400,36 +400,40 @@ function getRandomTile() {
         }
         attempt++;
     } while (attempt < 1001);
-    window.alert("No empty tiles found.");
+    setMsg("No empty tiles found.");
 }
 
 //    Check
 function checkWin() {
-    if (tiles.includes("2048")) {
-        setTimeout(() => {
-            win = true;
-            update();
-        }, 100);
+    if (!win || !loss) {
+        if (tiles.includes("2048")) {
+            setTimeout(() => {
+                win = true;
+                update();
+            }, 100);
+        }
     }
 }
 
 function checkLose() {
-    if (!tiles.includes("0")) {
-        for (let i = 0; i < 4; i++) {
-            for (let j = 0; j < 4; j++) {
-                let current = parseInt(tiles[i * 4 + j]);
-                if (
-                    (i < 3 && current === parseInt(tiles[(i + 1) * 4 + j])) ||
-                    (j < 3 && current === parseInt(tiles[i * 4 + j + 1]))
-                ) {
-                    return;
+    if (!loss || !win) {
+        if (!tiles.includes("0")) {
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    let current = parseInt(tiles[i * 4 + j]);
+                    if (
+                        (i < 3 && current === parseInt(tiles[(i + 1) * 4 + j])) ||
+                        (j < 3 && current === parseInt(tiles[i * 4 + j + 1]))
+                    ) {
+                        return;
+                    }
                 }
             }
+            setTimeout(() => {
+                loss = true;
+                update();
+            }, 100);
         }
-        setTimeout(() => {
-            loss = true;
-            update();
-        }, 100);
     }
 }
 
@@ -437,17 +441,20 @@ function checkLose() {
 function rename() {
     player = document.getElementById("player-name").value;
     window.localStorage.setItem("player", player);
+    encode();
 }
 
 //    Update
 function update() {
     if (win) {
         document.getElementById("status").innerHTML = "You won! Keep continuing, we need more!";
+        win = false;
     } else if (loss) {
         document.getElementById("status").innerHTML = "You Lost!";
+        loss = false;
         setTimeout(() => {
-            restart();
-        }, 5000);
+            restart(true);
+        }, 2000);
     } else {
         document.getElementById("status").innerHTML = "Playing...";
     }
@@ -458,6 +465,8 @@ function update() {
     encode();
     document.getElementById("encoded").textContent = encoded_binary;
 }
+
+//    Features
 
 //    Music
 function toggleMusic() {
@@ -475,9 +484,13 @@ function toggleMusic() {
     music.volume = 0.1;
 }
 
-function restart() {
-    if (confirm("Are you sure you want to restart?")) {
-        window.location.reload();
+//    Restart
+
+function restart(force = false) {
+    if (!force) {
+        if (confirm("Are you sure you want to restart?")) {
+            window.location.reload();
+        }
     }
 }
 
@@ -501,7 +514,7 @@ function randomQuote() {
 //     Encode
 function encodeName() {
     if (!player) {
-        window.alert("Enter your name");
+        setMsg("Enter your name");
         player = "Guest";
     }
     let encoded = "";
@@ -538,24 +551,24 @@ function decode() {
     decoded = decoded.split(" ");
 
     if (!decoded || decoded.length < 5) {
-        window.alert("Sorry, this is not a valid code.");
+        setMsg("Sorry, this is not a valid code.");
         return;
-    }    
+    }
 
     //    Checking if this code belongs to this game
     if (decoded[0] !== about.series) {
-        window.alert("Sorry, this code does not belong to 'Old Series'");
+        setMsg("Sorry, this code does not belong to 'Old Series'");
         return;
     }
 
     if (decoded[1] !== about.game) {
-        window.alert("Sorry, this code does not belong to this game");
+        setMsg("Sorry, this code does not belong to this game");
         return;
     }
 
     //    Checking if this code belongs to this version
     if (decoded[2] !== about.version) {
-        window.alert("This code does not belong to this version of the game. We are updateing it to the latest version for you.");
+        setMsg("This code does not belong to this version of the game. We are updateing it to the latest version for you.");
         decoded[2] = about.version;
     }
 
@@ -580,7 +593,7 @@ function decode() {
     }
 
     if (decoded_tiles.length !== 16) {
-        window.alert("Sorry, the code given does not contain all the tile values. Please try again. If the issue persists, the code is not valid.");
+        setMsg("Sorry, the code given does not contain all the tile values. Please try again. If the issue persists, the code is not valid.");
         return;
     }
 
@@ -597,18 +610,39 @@ function decode() {
 //    Save and Load
 function save() {
     window.localStorage.setItem("o.g2.encoded_binary", encoded_binary);
-    window.alert("Saved!");
+    setMsg("Saved!");
 }
 
 function load() {
     let code = window.localStorage.getItem("o.g2.encoded_binary");
     if (!code) {
-        window.alert("No saved data found.");
+        setMsg("No saved data found.");
         return;
     }
 
     document.getElementById("string").value = code;
     decode();
+}
+
+//    Button lock
+function lock() {
+    let lock = document.getElementById("btn-lock").value;
+    const button = document.getElementById(lock);
+
+    if (button) {
+        button.disabled = true;
+        console.log(`${lock} button disabled.`);
+    } else {
+        console.error("Button not found!");
+    }
+}
+
+//    Other
+
+//    Msg
+function setMsg(msg) {
+    document.getElementById("msg").innerText = msg;
+    $("#myModal").modal("show")
 }
 
 //    Devloper tools
@@ -641,5 +675,38 @@ function dev() {
             tiles[tile] = value;
         }
         set();
+    } else if (cmd === "/collapseUniverse") {
+        tiles.fill(1 / 0);
+        set();
+        const ele = document.createElement("div");
+        document.body.appendChild(ele);
+        ele.textContent = 1 / 0;
+        ele.setAttribute("class", "tile");
+        ele.style.zIndex = 999;
+        ele.style.left = "0";
+        ele.style.top = "0";
+        ele.style.animationName = "collapse";
+        ele.style.animationIterationCount = "infinite";
+        ele.style.animationDuration = "1s";
+        ele.style.animationDirection = "linear";
+        ele.style.opacity = "100%";
+        ele.style.position = "fixed";
+        ele.style.width = "100px";
+        ele.style.height = "100px";
+        document.getElementById("instructions").style.display = "none";
+        document.getElementById("settings").style.display = "none";
+        setTimeout(() => {
+            document.getElementById("status").innerHTML = "???"
+            document.getElementById("player-name").value = "Vidit Keshari, The developer";
+            document.getElementById("quote").innerHTML = "A not so peaceful area!";
+            document.body.style.background = "gray";
+            document.getElementById("stars-container").style.display = "none";
+            document.getElementById("still-stars-container").style.display = "none";
+            document.getElementById("moon").style.display = "none";
+            setMsg("You tried to corrupt my game? now see this: ");
+            setTimeout(() => {
+                window.location.href = "https://none.com";
+            }, 6500);
+        }, 5503);
     }
 }

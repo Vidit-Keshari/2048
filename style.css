@@ -55,7 +55,7 @@ body {
     font-weight: bold;
     animation: gradientMove2 5s infinite alternate ease-out;
     transition: 0.3s all ease-in-out;
-    font-size: 2rem ;
+    font-size: 2rem;
 }
 
 .control {
@@ -242,7 +242,7 @@ button.control:active {
     background: radial-gradient(circle, #ffffcc, #cccccc);
     border-radius: 50%;
     box-shadow: 0 0 20px #ffffcc;
-    z-index: - 1;
+    z-index: -100;
     transition: transform 0.3s linear;
 }
 
@@ -323,6 +323,8 @@ button.control:active {
 .copyright-footer {
     width: 100%;
     max-width: 100%;
+    height: fit-content;
+    max-height: fit-content;
     background: rgba(50, 9, 95, 1);
     background: linear-gradient(0deg, rgba(50, 9, 95, 1) 0%, rgba(30, 116, 190, 1) 100%);
     background: -moz-linear-gradient(0deg, rgba(50, 9, 95, 1) 0%, rgba(30, 116, 190, 1) 100%);
@@ -343,11 +345,11 @@ button.control:active {
     background-color: transparent;
 }
 
-.copyright-footer>center>label:hover {
-    transform: translateY(-2px);
+#footer {
+    transform: translateY(-2px) scale(1.05);
     color: #ffffff;
-    text-shadow: 0 0 15px rgba(30, 116, 210, 1), 0 0 30px rgba(50, 9, 95, 0.9), 0 0 45px rgba(30, 116, 210, 1);
-    background-color: transparent;
+    text-shadow: 0 0 15px rgba(18, 9, 95, 0.9), 0 0 30px rgba(30, 116, 210, 1), 0 0 45px rgb(75, 187, 231);
+    background-color: transparent !important;
 }
 
 label:not(#footer):not(#quote) {
@@ -363,7 +365,7 @@ label:not(#footer):not(#quote) {
     transition: 0.3s, transform 0.2s;
 }
 
-label:hover {
+label:not(#quote):hover {
     background: #003366;
     transform: scale(1.05);
     box-shadow: 0px 0px 16px rgba(30, 116, 210, 1), 0px 0px 30px rgba(0, 0, 255, 0.3), 0px 0px 42px rgba(0, 20, 50, 0.8) !important;
@@ -464,12 +466,116 @@ button:focus {
 
 #encoded {
     font-size: small !important;
-    max-width: 100% !important;
+    max-width: 90% !important;
     padding: 1% !important;
+    overflow: hidden;
+    white-space: wrap;
+    text-overflow: ellipsis;
+}
+
+.modal {
+    background: radial-gradient(circle farthest-corner at 10% 20%, rgb(5, 3, 95) 17.2%, rgb(50, 52, 199));
+    width: 80%;
+    max-width: 80%;
+    max-height: fit-content;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 10%;
+    border-radius: 35px;
+}
+
+.modal-dialog {
+    width: 90%;
+    height: 100% !important;
+}
+
+#modal-body {
+    background-color: transparent;
+}
+
+#myModal h2,
+#myModal h4 {
+    background-color: transparent;
+    width: 25%;
+    border-radius: 17px;
+    margin: 0;
+    color: rgb(187, 187, 248);
+    font-weight: bolder;
+    text-shadow: 0px 0px 15px #6ebbd3, 0px 0px 25px #258baa;
+    transition: all 0.3s ease-in-out;
+}
+
+#myModal p {
+    width: fit-content;
+    max-width: 80%;
+    background-color: transparent;
+    border-radius: 17px;
+    line-height: 2;
+    white-space: pre-wrap;
+    margin: 0;
+    font-size: large;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(187, 187, 248);
+    font-weight: bold;
+    text-shadow: 0px 0px 15px #6ebbd3, 0px 0px 25px #258baa;
+    transition: all 0.3s ease-in-out;
+}
+
+#myModal h2:hover,
+#myModal h4:hover,
+#myModal p:hover {
+    color: white;
+    text-shadow:
+        0px 0px 15px white,
+        0px 0px 22px #5ebbd3,
+        0px 0px 32px #1488ab,
+        0px 0px 42px rgba(20, 136, 171, 0.5);
+    transform: scale(1.05) translateY(-6px);
+}
+
+#btn-lock {
+    background: linear-gradient(145deg, #1c2bb3, #606bca);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 15px #252eaa, 0 0 25px #3a53e4;
+    outline: none;
+    transition: all 0.3s ease-in-out, background 0.3s ease-in-out;
+    text-transform: capitalize;
+}
+
+#btn-lock:hover {
+    background: linear-gradient(145deg, #2527aa, #6e78d3);
+    box-shadow: 0 0 15px #258baa, 0 0 25px #6ebbd3;
+    transform: scale(1.05);
+}
+
+#btn-lock:focus {
+    box-shadow: 0 0 25px #6ebbd3;
+}
+
+#btn-lock option {
+    background-color: #0b3552;
+    color: white;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+label[for="lock"] {
+    font-size: 14px !important;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /*    Responsiveness code    */
-@media (max-width: 600px) {
+@media (max-width: 720px) {
     #instructions h2 {
         font-size: 2rem;
     }
@@ -482,6 +588,57 @@ button:focus {
     #instructions li {
         font-size: 1rem;
     }
+
+    .modal {
+        width: 95%;
+    }
+
+    #myModal h2,
+    #myModal h4,
+    #myModal p {
+        width: 100%;
+    }
+
+    #heading {
+        font-family: sans-serif;
+    }
+
+    .tile {
+        font-size: 27px;
+    }
+
+    .tile-high {
+        font-size: 20px;
+    }
+
+    .control {
+        font-size: large !important;
+    }
+
+    .form-control {
+        font-size: large;
+    }
+}
+
+@media (max-width: 400px) {
+
+    #instructions,
+    #settings {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 2% 0;
+    }
+
+    #instructions li,
+    #instructions p {
+        font-size: 15px;
+    }
+
+    #encoded-info {
+        font-size: large !important;
+        font-weight: bold;
+    }
 }
 
 /*  Animation Definitions   */
@@ -489,7 +646,7 @@ button:focus {
     0% {
         background-position: 0% 0%;
     }
-    
+
     100% {
         background-position: 0% 100%;
     }
@@ -538,5 +695,27 @@ button:focus {
 
     50% {
         opacity: 0.3;
+    }
+}
+
+@keyframes collapse {
+    0% {
+        transform: translate(50px, 100px);
+    }
+
+    20% {
+        transform: translate(1100px, 100px);
+    }
+
+    40% {
+        transform: translate(1100px, 500px);
+    }
+
+    60% {
+        transform: translate(50px, 500px);
+    }
+
+    100% {
+        transform: translate(50px, 100px);
     }
 }

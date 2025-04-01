@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="style.css">
     <script src="main.js"></script>
@@ -59,14 +59,14 @@
                     <br><br>
                     <div id="controls">
                         <div id="up">
-                            <button onclick="up()" class="control">Up</button>
+                            <button onclick="up()" class="control" id="UP">Up</button>
                         </div>
                         <div id="middle">
-                            <button onclick="left()" class="control">Left</button>
-                            <button onclick="right()" class="control">Right</button>
+                            <button onclick="left()" class="control" id="left">Left</button>
+                            <button onclick="right()" class="control" id="right">Right</button>
                         </div>
                         <div id="bottom">
-                            <button onclick="down()" class="control">Down</button>
+                            <button onclick="down()" class="control" id="down">Down</button>
                         </div>
                     </div>
                     <br><br>
@@ -127,16 +127,16 @@
                 <li>Helped by- ChatGPT.</li>
                 <li>Made completely by Vidit Keshari.</li>
             </ul>
+            <h2>Notes</h2>
+            <ul>
+                <li>If you do not enter your name, your name will be set to guest automatically in the system.</li>
+                <li>Saving tha game and clearing the cache may delete the saved progress.</li>
+                <li>Your player name is connected Vidit: Old Series: Lights out player. Renaming yourself in one game
+                    renames you in the whole 'Old Series'.
+                </li>
+            </ul>
         </div>
-        <div class="copyright-footer">
-            <center>
-                <label id="footer">Made by Vidit Keshari</label>
-                <br>
-                <label id="footer">A VGames production</label>
-                <br>
-                <label id="footer">version - v.1.0</label>
-            </center>
-        </div>
+        <br><br>
         <center>
             <div id="settings">
                 <center>
@@ -156,18 +156,59 @@
                     <button onclick="load();">Load last saved</button>
                     <br><br>
                     <label id="encoded"></label>
-                    <br><br>
-                    <label>Click on the above binary code to copy it. Keep it safe so that next time when you come, you
-                        can continue from the progress you made. This includes the position of tiles and name of the 
+                    <br>
+                    <label id="encoded-info">Click on the above binary code to copy it. Keep it safe so that next time
+                        when you come, you
+                        can continue from the progress you made. This includes the position of tiles and name of the
                         player.
                     </label>
+                    <br><br>
+                    <label for="lock">You can lock any one button here it will be disabled. Good for strategies
+                        where you don't to accidently press a button:- 
+                    </label>
+                    <br>
+                    <select id="btn-lock">
+                        <option value="UP">Up</option>
+                        <option value="down">Down</option>
+                        <option value="left">Left</option>
+                        <option value="right">Right</option>
+                    </select>
+                    <br>
+                    <button onclick="lock();">Lock</button>
                     <br><br>
                     <button onclick="dev();" style="display: none;">Devlper tools</button>
                 </center>
             </div>
         </center>
         <br><br><br><br>
+        <div class="copyright-footer">
+            <center>
+                <label id="footer">Made by Vidit Keshari</label>
+                <br>
+                <label id="footer">A VGames production</label>
+                <br>
+                <label id="footer">version - v.1.0</label>
+            </center>
+        </div>
     </div>
+    <center>
+        <div id="myModal" class="modal fade" data-keyboard="false" role="dialog">
+            <div class="modal-dialog">
+                <div id="modal-content">
+                    <div id="modal-header">
+                        <button id="btn-clse" class="close" data-dismiss="modal" style="color: red;">&times;</button>
+                        <h2>2048:- </h2>
+                    </div>
+                    <hr>
+                    <div id="modal-body">
+                        <h4>Message: </h4>
+                        <br><br>
+                        <p id="msg"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
     <audio id="background-music" autoplay loop>
         <source src="Indian Walk - Nico Staf.mp3">
     </audio>
