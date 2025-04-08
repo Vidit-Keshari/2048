@@ -79,7 +79,7 @@ const CHARS = {
 const about = {
     series: "o", //old
     game: "g2", //game 2 2048
-    version: "v.2.0" //version v.1.0
+    version: "v.2.2" //version v.2.2
 };
 
 //    Functions
