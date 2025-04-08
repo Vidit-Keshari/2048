@@ -12,7 +12,6 @@ Once reached **2048** continue to make **BIGGER TILES**!
 
 ### 🎮 Controls:
 - **Arrow Keys**: Move tiles up, down, left, or right.
-- **W, A, S, D**: Alternative controls.
 - **Buttons**: For mobile users, swipe is not available because the page is scrollable. But buttons are provided below for **UP, DOWN, LEFT** and **RIGHT**.
 
 ### 🔮 Gameplay Rules:
@@ -45,6 +44,17 @@ Once reached **2048** continue to make **BIGGER TILES**!
 - **Creator:** Made completely by **Vidit Keshari**.
 
 ## Version history:
+
+### Minor but major update v.2.1
+- Fixed button lock issue, now keyboard controls are also locked!
+- Now locked buttons can be unlocked.
+- Fixed a bug where typing name including WASD won't let you type by removing WASD controls.
+- Removed WASD controls (ofcourse).
+- Fixed a where name of player was not being set to Guest.
+- Fixed, refined and tuned the moon animations in background.
+- Added new animation types for better performance and reduce GPU and CPU load (in moon).
+- Made the game more responsive for mobile users.
+- Fixed minor bugs.
 
 ### New update v.2.0
 - Some minor bug fixes.
