@@ -70,7 +70,7 @@ Once reached **2048** continue to make **BIGGER TILES**!
 - Added a button lock system
 
 > Sorry for not updating this README.md properly earlier (I forgot to write about the lock system)
-
+>
 > Very sorry for giving a incomplete update. Currently the lock system doesn't work properly. Also, I discovered several glitches which are due to
 > conflicts between WASD controls a name typing. The new update 2.1 is almost ready and I will be publishing it in a few minutes with fixed version of game.
 
