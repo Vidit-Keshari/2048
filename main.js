@@ -2,6 +2,7 @@
 var tiles = [];
 var win = false;
 var loss = false;
+var locked = false;
 var player = "";
 var playing = false;
 var encoded_binary = "";
@@ -78,7 +79,7 @@ const CHARS = {
 const about = {
     series: "o", //old
     game: "g2", //game 2 2048
-    version: "v.1.0" //version v.1.0
+    version: "v.2.0" //version v.1.0
 };
 
 //    Functions
@@ -151,15 +152,26 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    document.addEventListener("scroll", () => {
-        let scroll_pos = window.scrollY;
-        const moon = document.querySelector("#moon");
-        var new_pos = (((scroll_pos * 0.9) - scroll_pos) + 185);
+    const moon = document.querySelector("#moon");
+    let latestScrollY = 0;
+    let ticking = false;
 
-        if (moon) {
-            moon.style.top = `${new_pos}px`;
+    function updateMoonPosition() {
+        const moonOffset = (-0.1 * latestScrollY) + 185;
+        moon.style.transform = `translateY(${moonOffset}px)`;
+        ticking = false;
+    }
+
+    updateMoonPosition();
+
+    window.addEventListener("scroll", () => {
+        latestScrollY = window.scrollY;
+        if (!ticking) {
+            window.requestAnimationFrame(updateMoonPosition);
+            ticking = true;
         }
     });
+
 
     document.getElementById("encoded").addEventListener("click", () => {
         navigator.clipboard.writeText(encoded_binary);
@@ -196,24 +208,24 @@ document.addEventListener("DOMContentLoaded", function () {
 //    Keydown
 document.addEventListener("keydown", (e) => {
     key = e.key;
-    if ((key === "ArrowUp") || (key === "w")) {
+    if (key === "ArrowUp" && document.getElementById("UP").disabled != true) {
         e.preventDefault();
         up();
-    } else if ((key === "ArrowDown") || (key === "s")) {
+    } else if (key === "ArrowDown" && document.getElementById("down").disabled != true) {
         e.preventDefault();
         down();
-    } else if ((key === "ArrowLeft") || (key === "a")) {
+    } else if (key === "ArrowLeft" && document.getElementById("left").disabled != true) {
         left();
-    } else if ((key === "ArrowRight") || (key === "d")) {
+    } else if (key === "ArrowRight" && document.getElementById("right").disabled != true) {
         right();
     }
 });
 
-window.addEventListener("keydown", e => {
+/* window.addEventListener("keydown", e => {
     if (e.altKey && e.code === "KeyT") {
         dev();
     }
-});
+}); */
 
 //    Tile re-setup
 function set() {
@@ -429,8 +441,8 @@ function checkLose() {
                     }
                 }
             }
+            loss = true;
             setTimeout(() => {
-                loss = true;
                 update();
             }, 100);
         }
@@ -452,9 +464,7 @@ function update() {
     } else if (loss) {
         document.getElementById("status").innerHTML = "You Lost!";
         loss = false;
-        setTimeout(() => {
-            restart(true);
-        }, 2000);
+        setMsg("Oops, you lost! You will win next time. Restart from settings.");
     } else {
         document.getElementById("status").innerHTML = "Playing...";
     }
@@ -490,8 +500,10 @@ function restart(force = false) {
     if (!force) {
         if (confirm("Are you sure you want to restart?")) {
             window.location.reload();
+            return;
         }
     }
+    window.location.reload();
 }
 
 //    Quote
@@ -628,10 +640,17 @@ function load() {
 function lock() {
     let lock = document.getElementById("btn-lock").value;
     const button = document.getElementById(lock);
+    const btn_lock = document.querySelector("button[onclick='lock();']");
 
-    if (button) {
-        button.disabled = true;
+    if (button && !locked) {
+        locked = true;
+        button.disabled = locked;
+        btn_lock.innerHTML = "Unlock";
         console.log(`${lock} button disabled.`);
+    } else if (button && locked) {
+        locked = false;
+        button.disabled = locked;
+        btn_lock.innerHTML = "Lock";
     } else {
         console.error("Button not found!");
     }
@@ -640,7 +659,7 @@ function lock() {
 //    Other
 
 //    Msg
-function setMsg(msg) {
+function setMsg(msg = "Msgbox.show(msg); msg: any | string; msg not found.\n10011000 01101100 11110010 10100111\n00011110 00110101 11000100 00100010\n11110101  00000011 10100110 01011010\n10101101 11111000 01110101 00101110\n10111101 11010100 00111110 00010000\n11010101 10011001 01111111 00110100\n10100011 10110001 00001010 11110100\n00011001 11000001 10010100 01101111.\nYou just found a dev easter egg! :)") {
     document.getElementById("msg").innerText = msg;
     $("#myModal").modal("show")
 }
