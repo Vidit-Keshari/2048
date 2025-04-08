@@ -45,6 +45,11 @@ Once reached **2048** continue to make **BIGGER TILES**!
 
 ## Version history:
 
+### Minor update v.2.2
+- Fixed version issue in encoder and decoder.
+
+> Lol I noticed it just after v.2.1. And I noticed I never updated the version in the code. Sorry for that.
+
 ### Minor but major update v.2.1
 - Fixed button lock issue, now keyboard controls are also locked!
 - Now locked buttons can be unlocked.
@@ -64,10 +69,10 @@ Once reached **2048** continue to make **BIGGER TILES**!
 - Changed the mechanics a little to make the game better and avoid the unnecessary glitches
 - Added a button lock system
 
-Sorry for not updating this README.md properly earlier (I forgot to write about the lock system)
+> Sorry for not updating this README.md properly earlier (I forgot to write about the lock system)
 
-Very sorry for giving a incomplete update. Currently the lock system doesn't work properly. Also, I discovered several glitches which are due to
-conflicts between WASD controls a name typing. The new update 2.1 is almost ready and I will be publishing it in a few minutes with fixed version of game.
+> Very sorry for giving a incomplete update. Currently the lock system doesn't work properly. Also, I discovered several glitches which are due to
+> conflicts between WASD controls a name typing. The new update 2.1 is almost ready and I will be publishing it in a few minutes with fixed version of game.
 
 Thanks for your co-operation!
 
