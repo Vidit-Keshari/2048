@@ -49,8 +49,8 @@ Once reached **2048** continue to make **BIGGER TILES**!
 ### New update v.2.0
 - Some minor bug fixes.
 - Added new systems for saving the game.
-- Now the player names are synced with Vidit: Old Series: Lights Out.
-- Add some feature in approach to make the game compatible to phones.
+- Now the player names are synced with 'Vidit: Old Series: All games'
+- Added some features in approach to make the game compatible to phones.
 - Changed the mechanics a little to make the game better and avoid the unnecessary glitches
 - Added a button lock system
 
