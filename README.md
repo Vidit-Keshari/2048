@@ -13,6 +13,7 @@ Once reached **2048** continue to make **BIGGER TILES**!
 ### 🎮 Controls:
 - **Arrow Keys**: Move tiles up, down, left, or right.
 - **Buttons**: For mobile users, swipe is not available because the page is scrollable. But buttons are provided below for **UP, DOWN, LEFT** and **RIGHT**.
+- **For mobile users**: Swipe not included because the dev said scroll was more important. Blame gravity. (-By ChatGPT)
 
 ### 🔮 Gameplay Rules:
 1. Each move spawns a new tile with a value of **2**, **4**, or **8**.
