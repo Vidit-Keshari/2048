@@ -82,8 +82,6 @@ More updates soon!
 
 ## You may also like:
 > Vidit: Old-series: lights-out- https://vidit-keshari.github.io/lights-out/ (game) ~~~ https://github.com/vidit-keshari/lights-out/ (blog)
->
-> Vidit: Dussehra-game- https://vidit-keshari.github.io/dussehra-game/ (game) ~~~ https://github.com/vidit-keshari/dussehra-game/ (blog)
 
 A VGames production
 
